@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empirical Analysis - Capital Dilution Effect Study</title>
+    <link rel="stylesheet" href="assets/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <nav style="margin-bottom: 30px;">
+            <a href="methodology.html">← Previous: Methodology</a> |
+            <a href="index.html">Home</a> |
+            <a href="discussion.html">Next: Discussion →</a>
+        </nav>
+
+        <section id="empirical-analysis">
+            <h2>4. Empirical Analysis and Results</h2>
+
+            <h3>4.1 Bitcoin Dominance Trends Over Time</h3>
+            <p>
+                Our first empirical investigation examines the longitudinal evolution of Bitcoin dominance from 2013 to
+                2025. Figure 1 presents annual average BTC dominance with range bands showing intra-year volatility.
+            </p>
+
+            <div class="chart-container">
+                <div class="chart-title">Figure 1: Bitcoin Dominance Evolution (2013-2025)</div>
+                <canvas id="btcDominanceChart"></canvas>
+                <div class="chart-caption">
+                    Source: CoinMarketCap historical data. Chart shows annual average BTC dominance with high/low range
+                    bands.
+                </div>
+            </div>
+
+            <div class="key-finding">
+                <strong>Key Finding 1:</strong> Bitcoin dominance exhibits a clear cyclical pattern rather than
+                monotonic decline. BTC.D compressed from 93.3% (2013) to a cyclical low of 39.3% (2022) during peak alt
+                season, but recovered to 59.3% by 2025. This U-shaped recovery pattern suggests cyclically bounded
+                dilution within broader structural pressures.
+            </div>
+
+            <p>
+                The data reveals several distinct phases:
+            </p>
+            <ul>
+                <li><strong>2013-2016 (Early Dominance):</strong> BTC.D averaged 82-93%, reflecting Bitcoin's
+                    near-monopoly status in the nascent cryptocurrency ecosystem.</li>
+                <li><strong>2017-2018 (First Alt Season):</strong> Sharp BTC.D compression to 44.6% average (low of
+                    31.1%) during the ICO boom, as thousands of new tokens captured speculative capital.</li>
+                <li><strong>2019-2020 (Recovery Phase):</strong> BTC.D recovery to 60-63% during crypto winter as failed
+                    ICOs collapsed and capital returned to Bitcoin as safe haven.</li>
+                <li><strong>2021-2022 (Second Alt Season):</strong> BTC.D declined again to 39.3% during DeFi/NFT mania,
+                    marking the lowest dominance in Bitcoin's history.</li>
+                <li><strong>2023-2025 (Institutional Phase):</strong> Steady BTC.D recovery to 59.3% coinciding with
+                    spot ETF approvals and institutional adoption, suggesting quality-based capital consolidation.</li>
+            </ul>
+
+            <h3>4.2 Altcoin Proliferation and Market Fragmentation</h3>
+            <p>
+                The exponential growth in cryptocurrency supply represents the supply-side driver of the Capital
+                Dilution Effect. Figure 2 illustrates the dramatic expansion in both total and active cryptocurrencies.
+            </p>
+
+            <div class="chart-container">
+                <div class="chart-title">Figure 2: Cryptocurrency Supply Growth (2013-2025)</div>
+                <canvas id="altcoinGrowthChart"></canvas>
+                <div class="chart-caption">
+                    Source: CoinGecko, CoinMarketCap. "Active" cryptocurrencies defined here as those with ≥$100k 30-day
+                    average daily trading volume.
+                </div>
+            </div>
+
+            <div class="key-finding">
+                <strong>Key Finding 2:</strong> The cryptocurrency universe expanded from 50 assets in 2013 to over
+                17,000 by 2025—a 340x increase. Even conservative estimates of "active" cryptocurrencies show 300x
+                growth (50 to 15,000 assets), demonstrating sustained market fragmentation.
+            </div>
+
+            <p>
+                This explosive growth validates the supply-side component of our CDE hypothesis. The market now offers
+                thousands of competing investment vehicles, each vying for limited investor attention and capital. While
+                most altcoins remain insignificant individually, their collective presence creates a persistent dilutive
+                force by fragmenting the total addressable market. As of November 2025, real-time market data confirms
+                Bitcoin's dominance at 58.72% of the $3.94 trillion total cryptocurrency market cap, with Ethereum
+                holding 12.79% and Solana 2.81%. The altcoin market (excluding Bitcoin) represents $610.9 billion in
+                value, distributed across thousands of assets with varying degrees of liquidity and adoption
+                (Slickcharts, DemandSage, 2025).
+            </p>
+
+            <h3>4.3 Correlation Analysis: Altcoin Supply vs. Bitcoin Dominance</h3>
+            <p>
+                To test the direct relationship between altcoin proliferation and Bitcoin dominance erosion, Figure 3
+                presents a dual-axis time series comparing cryptocurrency supply growth with BTC.D trends.
+            </p>
+
+            <div class="chart-container">
+                <div class="chart-title">Figure 3: Inverse Relationship Between Altcoin Supply and BTC Dominance</div>
+                <canvas id="correlationChart"></canvas>
+                <div class="chart-caption">
+                    Dual-axis chart showing negative correlation between rising altcoin count (left axis) and declining
+                    BTC dominance (right axis, inverted scale).
+                </div>
+            </div>
+
+            <div class="key-finding">
+                <strong>Key Finding 3:</strong> Visual inspection reveals an inverse relationship between altcoin supply
+                growth and Bitcoin dominance, with a moderately strong negative sample correlation in our dataset (see
+                the Figure 3 caption for the computed r). This supports the CDE hypothesis, though the relationship is
+                clearly moderated by cyclical market dynamics.
+            </div>
+
+            <p>
+                However, the correlation is not perfectly linear, suggesting that other variables moderate the
+                relationship:
+            </p>
+            <ul>
+                <li><strong>Quality Filtering:</strong> Most new altcoins fail to capture meaningful market
+                    share; only top-tier projects (Ethereum, Solana, etc.) significantly impact BTC.D.</li>
+                <li><strong>Market Sentiment:</strong> Risk appetite fluctuations cause capital to alternately
+                    embrace or flee from altcoin exposure.</li>
+                <li><strong>Institutional Behavior:</strong> Professional investors apply rigorous due
+                    diligence, filtering out 95%+ of altcoins and concentrating capital in Bitcoin and a handful
+                    of proven alternatives.</li>
+            </ul>
+
+            <h3>4.4 Year-over-Year Dominance Changes and Market Cycles</h3>
+            <p>
+                Analyzing year-over-year changes in Bitcoin dominance reveals the cyclical nature of capital
+                dilution effects.
+            </p>
+
+            <div class="chart-container">
+                <div class="chart-title">Figure 4: Year-over-Year Changes in Bitcoin Dominance</div>
+                <canvas id="yoyChangeChart"></canvas>
+                <div class="chart-caption">
+                    Positive values indicate BTC dominance gains; negative values indicate alt season dilution
+                    effects.
+                </div>
+            </div>
+
+            <p>
+                The bar chart clearly illustrates alternating phases of dilution and recovery:
+            </p>
+            <ul>
+                <li><strong>Major Dilution Periods:</strong> 2017 (-24.1%), 2021 (-15.1%), and 2022 (-8.3%)
+                    correspond to speculative bull markets and alt seasons.</li>
+                <li><strong>Recovery Periods:</strong> 2019 (+15.6%), 2023 (+6.3%), 2024 (+6.3%), and 2025
+                    (+7.4%) correspond to bear market recoveries and flight-to-quality phases.</li>
+            </ul>
+
+            <div class="key-finding">
+                <strong>Key Finding 4:</strong> Capital Dilution Effect operates cyclically rather than
+                linearly. During risk-on bull markets, BTC.D declines sharply as speculative capital chases
+                altcoin gains. During risk-off corrections, natural market mechanisms eliminate weak projects
+                and capital reconsolidates in Bitcoin, causing BTC.D recovery.
+            </div>
+
+            <h3>4.5 Cryptocurrency User Distribution Analysis</h3>
+            <p>
+                Beyond market capitalization metrics, examining user distribution provides insights into
+                fundamental adoption patterns. Table 1 presents global cryptocurrency ownership data for
+                2023-2024.
+            </p>
+
+            <div class="chart-container">
+                <div class="chart-title">Figure 5: Cryptocurrency User Distribution (2023-2024)</div>
+                <canvas id="userDistributionChart"></canvas>
+                <div class="chart-caption">
+                    Source: Global cryptocurrency surveys and exchange data. Shows Bitcoin maintains majority
+                    user base despite altcoin proliferation.
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Total Crypto Users (M)</th>
+                        <th>Bitcoin Owners (M)</th>
+                        <th>Ethereum Owners (M)</th>
+                        <th>BTC Users %</th>
+                        <th>ETH Users %</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2023</td>
+                        <td>583</td>
+                        <td>298</td>
+                        <td>125</td>
+                        <td>51.1%</td>
+                        <td>21.4%</td>
+                    </tr>
+                    <tr>
+                        <td>2024</td>
+                        <td>659</td>
+                        <td>337</td>
+                        <td>142</td>
+                        <td>51.2%</td>
+                        <td>21.7%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="key-finding">
+                <strong>Key Finding 5:</strong> Bitcoin maintains remarkably stable user dominance at ~51%
+                despite massive altcoin proliferation. This suggests that while capital may be diluted across
+                thousands of assets, fundamental user adoption and trust remain concentrated in Bitcoin,
+                supporting its long-term store of value thesis.
+            </div>
+        </section>
+
+        <nav style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #ecf0f1;">
+            <a href="methodology.html">← Previous: Methodology</a> |
+            <a href="index.html">Home</a> |
+            <a href="discussion.html">Next: Discussion →</a>
+        </nav>
+    </div>
+
+    <script src="assets/charts.js"></script>
+</body>
+
+</html>

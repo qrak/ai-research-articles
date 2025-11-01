@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methodology - Capital Dilution Effect Study</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <nav style="margin-bottom: 30px;">
+            <a href="literature-review.html">← Previous: Literature Review</a> |
+            <a href="index.html">Home</a> |
+            <a href="empirical-analysis.html">Next: Empirical Analysis →</a>
+        </nav>
+
+        <section id="methodology">
+            <h2>3. Methodology</h2>
+
+            <h3>3.1 Research Design</h3>
+            <p>
+                This study employs a mixed-methods approach combining:
+            </p>
+            <ul>
+                <li><strong>Conceptual Analysis:</strong> Formulation of the CDE theoretical hypothesis based on market
+                    observations and theoretical dialectics.</li>
+                <li><strong>Literature Review:</strong> Synthesis of available academic research, industry reports
+                    (CoinMarketCap, Glassnode, Blockchain Intelligence Group), and expert opinions.</li>
+                <li><strong>Empirical Analysis:</strong> Quantitative examination of historical data on BTC dominance,
+                    altcoin proliferation, and capital flows across the period 2013-2025.</li>
+                <li><strong>Case Studies:</strong> Detailed examination of selected "alt seasons" (2017-2018, 2020-2021)
+                    and their impact on Bitcoin dominance.</li>
+            </ul>
+
+            <h3>3.2 Variables and Operationalization</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Variable</th>
+                        <th>Operationalization</th>
+                        <th>Data Source</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>BTC Dominance</strong></td>
+                        <td>Bitcoin market cap / Total crypto market cap (%)</td>
+                        <td>CoinMarketCap, TradingView</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Altcoin Count</strong></td>
+                        <td>Number of registered crypto projects on major exchanges</td>
+                        <td>CoinGecko, CoinMarketCap</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Capital Flows</strong></td>
+                        <td>Transaction volume and capital migration from BTC to altcoins (on-chain metrics)</td>
+                        <td>Glassnode, Chainalysis</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Market Cycle</strong></td>
+                        <td>Bull vs. bear phase (determined by BTC price and MVRV technical indicator)</td>
+                        <td>TradingView, Analytics</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CDE Intensity</strong></td>
+                        <td>Composite index = f(BTC Dom, Altcoin Count, Transaction Vol)</td>
+                        <td>Derived metric</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>3.3 Data Sources and Period</h3>
+            <p>
+                Our primary data encompasses the period from 2013 to 2025, capturing the evolution from Bitcoin's early
+                dominance through multiple market cycles including the 2017-2018 ICO boom, the 2020-2021 DeFi/NFT surge,
+                the 2022 bear market, and the 2024-2025 institutional adoption phase via ETFs.
+            </p>
+
+            <h3>3.4 Methodological Limitations</h3>
+
+            <h4>3.4.1 Incomplete On-Chain Data: Quantifying the Invisible Market</h4>
+            <p>
+                A significant methodological challenge involves capital flows that remain opaque due to
+                privacy-enhancing features and off-chain transactions. Recent blockchain analytics research (2025)
+                demonstrates that comprehensive data collection has substantially improved, with platforms like Dune
+                Analytics, Flipside Crypto, and Arkham Intelligence now providing SQL-based querying and real-time
+                analytics across Bitcoin, Ethereum, EVM, and non-EVM blockchains. However, critical blind spots persist:
+            </p>
+            <ul>
+                <li><strong>Privacy Coins:</strong> As of 2025, the privacy coin sector (led by Monero and Zcash)
+                    represents approximately $14.3 billion in market capitalization—a relatively small fraction (~0.7%)
+                    of Bitcoin's $2 trillion market cap. While Zcash surged to $388 (an 8-year high) with a $6.2 billion
+                    market cap in late 2024, privacy coin transaction volumes remain deliberately opaque by design,
+                    employing ring signatures (Monero) and zero-knowledge proofs (Zcash) that obscure sender, receiver,
+                    and transaction amounts. This creates an estimated 1-2% data gap in total crypto market visibility.
+                </li>
+
+                <li><strong>Decentralized Exchange (DEX) Volume:</strong> DEX trading has exploded, with Q2 2025 data
+                    showing $876.3 billion in spot trading volume (up 25% quarter-over-quarter) and average weekly
+                    volume of $18.6 billion. Uniswap commands 35.9% market share ($111.8 billion monthly), while
+                    PancakeSwap achieved record $310 billion annual volume in 2024 (179% year-over-year growth). DEX
+                    perpetual futures reached $898 billion in Q2 2025, dominated by Hyperliquid (73% market share).
+                    While DEX analytics have dramatically improved, unique wallet counts (9.7 million mid-2025, up from
+                    6.8 million) represent only a fraction of actual trading activity due to multi-wallet strategies and
+                    automated trading bots.</li>
+
+                <li><strong>Off-Chain Transactions:</strong> British Accounting Review research (2025) examining Bitcoin
+                    market efficiency from 2014-2022 confirms that off-chain factors (liquidity and investor attention)
+                    interact significantly with on-chain metrics (active wallets, transaction fees, transaction volume).
+                    Layer-2 solutions (Lightning Network, Liquid Network) and centralized exchange internal transfers
+                    remain partially untracked, though their impact on Bitcoin dominance calculations is mitigated by
+                    the fact that BTC.D is computed from market capitalization rather than transaction volume.</li>
+            </ul>
+            <p>
+                <strong>Mitigation Strategy:</strong> We triangulate data from multiple sources (CoinMarketCap,
+                CoinGecko, Glassnode, DefiLlama) and focus our analysis on market capitalization-based dominance
+                metrics, which aggregate price × supply and are less vulnerable to off-chain transaction opacity than
+                volume-based metrics. The growing accessibility of on-chain analytics tools across multiple blockchain
+                ecosystems reduces but does not eliminate this limitation.
+            </p>
+
+            <h4>3.4.2 Endogeneity and Causality: Disentangling Correlation from Cause</h4>
+            <p>
+                The fundamental challenge of distinguishing causation from correlation pervades cryptocurrency market
+                analysis. The core question—<em>Does altcoin proliferation cause Bitcoin dominance decline, or does
+                    Bitcoin dominance decline create conditions that attract altcoin investment?</em>—remains difficult
+                to resolve definitively. Recent econometric research provides methodological frameworks for addressing
+                this challenge:
+            </p>
+            <ul>
+                <li><strong>Granger Causality Testing:</strong> Multiple studies employ Granger causality tests to
+                    examine temporal precedence in cryptocurrency markets. Research analyzing Bitcoin's relationship
+                    with macroeconomic variables, gold prices, and M2 money supply demonstrates that Granger causality
+                    can identify whether changes in one variable systematically precede changes in another. Studies
+                    examining Bitcoin-altcoin dynamics through network analysis reveal complex interdependencies, with
+                    Bitcoin typically exhibiting high "in-degree" (receiving causal influences) and "out-degree"
+                    (exerting causal influences) in cryptocurrency networks.</li>
+
+                <li><strong>Reflexivity and Endogeneity Indices:</strong> Mark et al. (2022) developed a "reflexivity
+                    index" to quantify activity generated endogenously within cryptocurrency markets, measuring the
+                    extent to which market movements are self-reinforcing versus driven by external factors. This
+                    approach acknowledges that cryptocurrency markets exhibit significant endogenous dynamics—price
+                    movements trigger narrative shifts that attract capital flows, creating feedback loops that
+                    complicate causal inference.</li>
+
+                <li><strong>Instrumental Variables Approach:</strong> Addressing endogeneity requires identifying
+                    exogenous instrumental variables correlated with altcoin supply growth but not directly affecting
+                    Bitcoin dominance through other channels. Potential instruments include: (1) regulatory
+                    announcements affecting token issuance costs, (2) blockchain technology breakthroughs enabling new
+                    token standards (ERC-20 in 2017, BRC-20 in 2023), and (3) venture capital funding cycles in
+                    blockchain startups. However, valid instruments remain challenging to identify given the
+                    interconnected nature of crypto ecosystem developments.</li>
+
+                <li><strong>Macro-Micro Factor Integration:</strong> Recent research (2025) demonstrates that
+                    integrating diverse data sources—technical indicators, on-chain metrics, sentiment indicators,
+                    traditional market indices, and macroeconomic indicators—substantially improves cryptocurrency
+                    forecasting accuracy. On-chain metrics prove paramount for both short-term and long-term
+                    predictions, while traditional market indices and macroeconomic indicators gain relevance for
+                    longer-term forecasts. This suggests that Bitcoin dominance dynamics result from complex
+                    interactions between crypto-specific factors and broader financial market conditions, further
+                    complicating causal identification.</li>
+            </ul>
+            <p>
+                <strong>Our Approach:</strong> Rather than claiming definitive causal direction, we acknowledge
+                bidirectional feedback mechanisms. We present correlation analysis (Pearson r = -0.92 between altcoin
+                supply and BTC dominance) as descriptive evidence of association, while carefully avoiding causal
+                language. We triangulate multiple analytical approaches—time-series analysis of market cycles,
+                year-over-year dominance changes, institutional capital allocation patterns—to build a circumstantial
+                case that altcoin proliferation represents a structural force rather than merely a consequence of
+                Bitcoin weakness. Future research employing panel data methods, quasi-experimental designs around
+                regulatory shocks, or machine learning approaches to causal inference could strengthen causal claims
+                beyond our current correlational framework.
+            </p>
+
+            <h4>3.4.3 Limited Historical Data</h4>
+            <p>
+                The cryptocurrency market's ~16-year existence constrains long-term trend analysis and limits our
+                ability to distinguish secular trends from super-cycles. Traditional financial markets benefit from
+                century-long datasets enabling identification of multi-decade patterns; cryptocurrency markets provide
+                barely more than one full economic cycle (2009-2025), spanning only two Federal Reserve rate-hiking
+                cycles and three major bear markets.
+            </p>
+        </section>
+
+        <nav style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #ecf0f1;">
+            <a href="literature-review.html">← Previous: Literature Review</a> |
+            <a href="index.html">Home</a> |
+            <a href="empirical-analysis.html">Next: Empirical Analysis →</a>
+        </nav>
+    </div>
+</body>
+
+</html>
