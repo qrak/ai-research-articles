@@ -46,6 +46,54 @@ def cmc_global(start, end):
     return get(url)["data"]["quotes"]
 
 
+# CoinMarketCap ids: the assets worth $100bn+ today, i.e. the ones that could have taken BTC's share.
+COINS = {"btc": 1, "eth": 1027, "usdt": 825, "usdc": 3408, "sol": 5426, "bnb": 1839, "xrp": 52}
+
+
+def coin_monthly(cid):
+    """Month-end market cap for one asset; the endpoint caps a response at 732 daily rows."""
+    out = {}
+    y = 2013
+    while y <= CUTOFF.year:
+        s = int(datetime(y, 1, 1, tzinfo=timezone.utc).timestamp())
+        nxt = min(datetime(y + 2, 1, 1, tzinfo=timezone.utc),
+                  datetime(CUTOFF.year, CUTOFF.month, CUTOFF.day, tzinfo=timezone.utc))
+        e = int(nxt.timestamp())
+        if s >= e:
+            break
+        try:
+            url = ("https://api.coinmarketcap.com/data-api/v3/cryptocurrency/historical"
+                   f"?id={cid}&convertId=2781&timeStart={s}&timeEnd={e}&interval=1d")
+            for q in get(url)["data"]["quotes"]:
+                d = q["timeOpen"][:10]
+                if d > CUTOFF.isoformat():
+                    continue
+                cap = q["quote"].get("marketCap")
+                if cap:
+                    out[d[:7]] = cap
+        except (KeyError, TypeError) as ex:
+            print(f"  coin {cid} window {y}: {ex}", file=sys.stderr)
+        y += 2
+    return out
+
+
+def composition(cap_months):
+    """Share of total market cap held by BTC, ETH, stablecoins, the top seven, and everything else."""
+    series = {k: coin_monthly(v) for k, v in COINS.items()}
+    out = []
+    for c in cap_months:
+        total = c["mcap"]
+        month = c["month"]
+        row = {"month": month}
+        for k, s in series.items():
+            row[k] = round(100 * s.get(month, 0) / total, 2) if total else 0
+        row["stables"] = round(row["usdt"] + row["usdc"], 2)
+        row["top7"] = round(sum(row[k] for k in COINS), 2)
+        row["longTail"] = round(100 - row["top7"], 2)
+        out.append(row)
+    return out
+
+
 def fetch_dominance(first_year=2013):
     """Daily BTC/ETH dominance and market caps, up to CUTOFF. Chunked per year: one range is ~30 MB."""
     rows = []
@@ -196,18 +244,25 @@ def main():
     yrs, mon = yearly(rows), monthly(rows)
     print("fetching DefiLlama TVL…", file=sys.stderr)
     tvl = defi_tvl()
+    print("fetching per-asset market caps (7 assets × 7 windows)…", file=sys.stderr)
+    cap_months = capital(rows)
+    comp = composition(cap_months)
 
     levels = pearson([m["active"] for m in mon], [m["btc"] for m in mon])
     dl_a = [math.log(m["active"]) for m in mon]
     dl_b = [m["btc"] for m in mon]
     diff_a = [b - a for a, b in zip(dl_a, dl_a[1:])]
     diff_b = [b - a for a, b in zip(dl_b, dl_b[1:])]
+
+    # Composition is descriptive on purpose: shares sum to 100, so correlating one share
+    # against another measures accounting, not dilution. The telling fact is the level path.
     stats = {
         "nMonths": len(mon),
         "rLevels": round(levels, 3),
         "pLevels": round(p_value(levels, len(mon)), 4),
         "rDiff": round(pearson(diff_a, diff_b), 3),
         "pDiff": round(p_value(pearson(diff_a, diff_b), len(diff_a)), 4),
+        "nCompMonths": len(comp),
         "first": rows[0]["date"],
         "last": rows[-1]["date"],
         "mcapFirst": rows[0]["mcap"],
@@ -231,6 +286,8 @@ def main():
     assert all(0 < y["avg"] < 100 for y in yrs), "dominance out of range"
     assert stats["nMonths"] >= 40, f"too few months with asset counts: {stats['nMonths']}"
     assert stats["mcapLast"] > stats["mcapFirst"] * 100, "market cap series looks wrong"
+    assert stats["nCompMonths"] >= 100, f"too few months of composition: {stats['nCompMonths']}"
+    assert all(abs(c["top7"] + c["longTail"] - 100) < 0.1 for c in comp), "composition does not add up"
 
     payload = {
         "generated": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
@@ -239,7 +296,8 @@ def main():
         "years": list(years),
         "dominance": yrs,
         "eth": eth_yearly(rows),
-        "capital": capital(rows),
+        "capital": cap_months,
+        "composition": comp,
         "monthly": mon,
         "tvl": tvl,
         "stats": stats,
@@ -257,6 +315,14 @@ def main():
         print(f"{y['year']}  {y['avg']:5.1f} {y['low']:5.1f} {y['high']:5.1f}  {str(y['yoy']):>6}")
     print("\nstats:", json.dumps(stats))
     print("tvl months:", len(tvl), "first", tvl[0]["date"], "last", tvl[-1]["date"])
+
+    idx = {c["month"]: c for c in comp}
+    print("\ncomposition (% of total market cap)")
+    print("month    btc   eth  stables  top7  longTail")
+    for m in ("2018-01", "2021-11", "2022-12", "2024-01", "2025-11"):
+        c = idx.get(m)
+        if c:
+            print(f"{m}  {c['btc']:5.1f} {c['eth']:5.1f} {c['stables']:8.1f} {c['top7']:5.1f} {c['longTail']:9.1f}")
 
 
 if __name__ == "__main__":

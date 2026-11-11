@@ -81,4 +81,29 @@
             scales: { y: { type: 'logarithmic', ticks: { callback: v => usd(v) }, title: { display: true, text: 'TVL (USD, log scale)' } }, x: { ticks: { maxTicksLimit: 12 } } }
         }
     });
+    if (el('compositionChart')) {
+        const otherTop = D.composition.map(c => +(c.top7 - c.btc - c.eth - c.stables).toFixed(2));
+        const series = (label, data, color) => ({ label, data, backgroundColor: color, borderWidth: 0 });
+        new Chart(el('compositionChart'), {
+            type: 'bar',   // stacked bars, not stacked areas: the fill is unambiguous
+            data: {
+                labels: D.composition.map(c => c.month),
+                datasets: [
+                    series('Bitcoin', D.composition.map(c => c.btc), 'rgba(243,156,18,.9)'),
+                    series('Ethereum', D.composition.map(c => c.eth), 'rgba(120,140,200,.9)'),
+                    series('Stablecoins (USDT+USDC)', D.composition.map(c => c.stables), 'rgba(39,174,96,.9)'),
+                    series('Other large caps (SOL, BNB, XRP)', otherTop, 'rgba(142,68,173,.9)'),
+                    series('Long tail (everything else)', D.composition.map(c => c.longTail), 'rgba(160,160,160,.9)')
+                ]
+            },
+            options: {
+                ...base,
+                plugins: { legend: { display: true, position: 'bottom' } },
+                scales: {
+                    x: { stacked: true, ticks: { maxTicksLimit: 12 } },
+                    y: { stacked: true, max: 100, title: { display: true, text: 'Share of total market cap (%)' } }
+                }
+            }
+        });
+    }
 })();
